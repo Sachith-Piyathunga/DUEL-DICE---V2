@@ -56,5 +56,32 @@ A modern Android dice game built with Jetpack Compose where players compete agai
 - **Score Button**: End turn and add current dice sum to total
 - **Back to Menu**: Return to main menu anytime
 
+## 🏗️ Technical Architecture
+
+### Project Structure
+```
+app/src/main/java/com/example/dueldice/
+├── MainActivity.kt          # Main activity and UI components
+├── GameLogic.kt            # Game state management and logic
+└── res/
+    └── drawable/
+        ├── dice_background.png    # Main background image
+        ├── game_background.png    # Game screen background
+        ├── dice_1.png            # Dice face images (optional)
+        ├── dice_2.png
+        ├── dice_3.png
+        ├── dice_4.png
+        ├── dice_5.png
+        └── dice_6.png
+```
+
+
+
+
+
+
+
+
+
 
 
