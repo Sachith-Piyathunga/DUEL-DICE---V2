@@ -29,6 +29,7 @@ data class GameState(
     val isTieBreaker: Boolean = false   // Whether the game is currently in a tie breaker round
 )
 
+// Create a class to handles the full logic of the game
 class GameManager {
 
     /*
@@ -47,50 +48,42 @@ class GameManager {
     - Calculate expected value of keeping current dice vs. rerolling
     - Use probability-based decision making for optimal play
 
-    Advantages:
-    - Adapts to game situation dynamically
-    - Considers both offensive and defensive positions
-    - Uses mathematical expected value calculations
-    - Balances risk vs. reward based on score differential
-
-    Disadvantages:
-    - May be too conservative in some situations
-    - Doesn't account for human player's potential strategies
-    - Random elements can still lead to suboptimal outcomes
-
     The strategy implementation uses the following approach:
     1. Always keep dice showing 5 or 6 (high value)
     2. Keep dice showing 4 if ahead significantly or close to target
     3. Keep dice showing 3 only if significantly ahead
-    4. Be more aggressive (random decisions) when behind
+    4. Be more aggressive when behind the player - this is random dessition
     5. Play conservatively in other situations
     */
 
+    // This function to handle player's dice roll
     suspend fun rollHumanDice(gameState: GameState): GameState {
-        // Start rolling animation
+        // Set rolling animation (Starting point)
         val newState = gameState.copy(isRolling = true)
 
         delay(1000) // Animation delay (exactly same as computer)
 
+        // Generate new dice values and the keep selected ones if not the first roll
         val newHumanDice = gameState.humanDice.mapIndexed { index, value ->
             if (gameState.rollCount == 0 || !gameState.selectedDice[index]) {
-                Random.nextInt(1, 7)
+                Random.nextInt(1, 7)    // Roll the new dice value
             } else {
-                value
+                value   // Keep the existing die
             }
         }
 
+        // Update game state after rolling - player and computer
         val updatedState = newState.copy(
             humanDice = newHumanDice,
             rollCount = gameState.rollCount + 1,
-            selectedDice = listOf(false, false, false, false, false),
-            canThrow = gameState.rollCount < 2,
+            selectedDice = listOf(false, false, false, false, false),   // Reset the selection
+            canThrow = gameState.rollCount < 2, // Only allow max 3 rolls
             canScore = true,
             canSelectDice = gameState.rollCount < 2,
             isRolling = false
         )
 
-        // Auto-score after 3 rolls or handle tie breaker
+        // If roll limit reached or in tie breaker, skip to computer turn
         return if (updatedState.rollCount >= 3 || gameState.gamePhase == GamePhase.TIE_BREAKER) {
             if (gameState.gamePhase == GamePhase.TIE_BREAKER) {
                 // In tie breaker, immediately transition to computer turn
@@ -110,7 +103,7 @@ class GameManager {
                 )
             }
         } else {
-            updatedState
+            updatedState    // Continue human turn
         }
     }
 
