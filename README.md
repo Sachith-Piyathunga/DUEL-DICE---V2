@@ -131,7 +131,7 @@ app/src/main/java/com/example/dueldice/
 ## 🎨 Customization
 
 ### Changing Target Score
-- Use "Set Score" button on main menu
+- Use "Set Score" button on the main menu
 - Enter any positive integer
 - Default: 101 points
 
@@ -147,8 +147,21 @@ Modify computer strategy in `GameLogic.kt`:
 - Change dice keeping logic in `computerStrategy()`
 - Modify aggression levels based on score difference
 
+## 🤝 Contributing
 
+### Code Style
+- Follow Android Kotlin style guidelines
+- Use meaningful variable and function names
+- Add comprehensive comments for complex logic
+- Maintain consistent indentation 
 
+### Adding Features
+1. Fork the repository
+2. Create feature branch: `git checkout -b feature-name`
+3. Implement changes with tests
+4. Submit a pull request with a detailed description
+
+*Built with ❤️ using Jetpack Compose and Kotlin - if you like this repo give me a star*
 
 
 
