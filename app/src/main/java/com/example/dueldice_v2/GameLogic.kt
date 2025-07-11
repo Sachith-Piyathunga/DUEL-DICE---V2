@@ -1,4 +1,3 @@
-
 // Package declaration
 package com.example.dueldice
 

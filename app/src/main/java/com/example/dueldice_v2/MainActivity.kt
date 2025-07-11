@@ -1,5 +1,7 @@
+// Declare the package name
 package com.example.dueldice
 
+// Import Android and Jetpack Compose components used in main activity
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -30,22 +32,28 @@ import androidx.compose.ui.window.Dialog
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+// Main entry point of the app; inherits from ComponentActivity
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Set the UI content using Jetpack Compose
         setContent {
+            // Apply the custom app theme
             DuelDiceTheme {
+                // Load the game UI
                 DiceGameApp()
             }
         }
     }
 }
 
+// Add the custom Material theme used throughout the app
 @Composable
 fun DuelDiceTheme(content: @Composable () -> Unit) {
     MaterialTheme(
-        colorScheme = lightColorScheme(),
-        content = content
+        colorScheme = lightColorScheme(),   // Use default light color scheme
+        content = content   // Pass the inner content to be themed
     )
 }
 
