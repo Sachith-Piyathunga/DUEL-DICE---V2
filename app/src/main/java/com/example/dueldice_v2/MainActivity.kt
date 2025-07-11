@@ -783,31 +783,33 @@ fun GameScreen(
         }
     }
 
+    // Add the dialog when game is over
     if (showWinDialog) {
-        Dialog(onDismissRequest = { }) {
+        Dialog(onDismissRequest = { }) {   // Prevent dismissing the dialog by clicking outside
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(16.dp),
-                shape = RoundedCornerShape(16.dp)
+                shape = RoundedCornerShape(16.dp)       // Rounded corners for a softer UI
             ) {
                 Column(
                     modifier = Modifier.padding(16.dp),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
+                    // Set the win message: "You Win!" or "Computer Wins!"
                     Text(
                         text = winMessage,
                         fontSize = 24.sp,
                         fontWeight = FontWeight.Bold,
-                        color = if (isHumanWinner) Color.Green else Color.Red
+                        color = if (isHumanWinner) Color.Green else Color.Red   // Set the green if user wins, red otherwise
                     )
 
-                    Spacer(modifier = Modifier.height(16.dp))
-
+                    Spacer(modifier = Modifier.height(16.dp))   // Set the space before button
+                    // OK button to close the dialog and notify parent composable
                     Button(
                         onClick = {
-                            showWinDialog = false
-                            onGameEnd(isHumanWinner)
+                            showWinDialog = false       // Close the dialog
+                            onGameEnd(isHumanWinner)    // Notify game result
                         }
                     ) {
                         Text("OK")
