@@ -50,6 +50,11 @@ A modern Android dice game built with Jetpack Compose where players compete agai
    - If both reach the target in the same round, the highest score wins
    - If tied exactly, a sudden-death tie-breaker round
 
+### Controls
+- **Tap Dice**: Select/deselect dice to keep for next roll
+- **Throw Button**: Roll unselected dice
+- **Score Button**: End turn and add current dice sum to total
+- **Back to Menu**: Return to main menu anytime
 
 
 
