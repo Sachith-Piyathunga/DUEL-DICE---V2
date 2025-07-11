@@ -321,7 +321,7 @@ class GameManager {
                 die >= 5 -> true
                 // Keep 4s if we're ahead or close to target
                 die == 4 && (isAheadSignificantly || isCloseToTarget) -> true
-                // Keep 3s only if significantly ahead
+                // Keep 3s only if significantly close to end
                 die == 3 && isAheadSignificantly -> true
                 // Be more aggressive if behind
                 die >= 3 && isBehindSignificantly -> Random.nextBoolean()
