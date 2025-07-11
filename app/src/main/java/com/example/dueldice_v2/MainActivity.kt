@@ -768,9 +768,9 @@ fun GameScreen(
 
             Spacer(modifier = Modifier.height(24.dp))   // Final spacing before bottom content
 
-            // Back to Menu button
+            // Add the back to Menu button - appears below game screen to return to main menu
             Button(
-                onClick = onBackToMenu,
+                onClick = onBackToMenu,     // Callback to return to main menu
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(50.dp),
@@ -778,7 +778,7 @@ fun GameScreen(
                     containerColor = MaterialTheme.colorScheme.secondary.copy(alpha = 0.9f)
                 )
             ) {
-                Text("Back to Menu", fontSize = 18.sp)
+                Text("Back to Menu", fontSize = 18.sp)  // Add the button label
             }
         }
     }
