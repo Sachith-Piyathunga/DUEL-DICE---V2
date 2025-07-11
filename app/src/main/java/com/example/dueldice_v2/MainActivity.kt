@@ -99,8 +99,10 @@ fun DiceFaceDots(value: Int) {
             .border(2.dp, Color.Black, RoundedCornerShape(8.dp))    // Add black border around the dice
             .padding(4.dp)  // Add padding inside the dice
     ) {
+        // Based on the value (1-6), draw black dots using smaller Box components
         when (value) {
             1 -> {
+                // Single center dot
                 Box(
                     modifier = Modifier
                         .size(8.dp)
@@ -109,6 +111,7 @@ fun DiceFaceDots(value: Int) {
                 )
             }
             2 -> {
+                // Top-left and bottom-right dots
                 Box(
                     modifier = Modifier
                         .size(8.dp)
@@ -125,6 +128,7 @@ fun DiceFaceDots(value: Int) {
                 )
             }
             3 -> {
+                // Diagonal line of 3 dots
                 Box(
                     modifier = Modifier
                         .size(8.dp)
@@ -147,6 +151,7 @@ fun DiceFaceDots(value: Int) {
                 )
             }
             4 -> {
+                // Four corner dots
                 Box(
                     modifier = Modifier
                         .size(8.dp)
@@ -177,6 +182,7 @@ fun DiceFaceDots(value: Int) {
                 )
             }
             5 -> {
+                // Four corner dots and a center dot
                 Box(
                     modifier = Modifier
                         .size(8.dp)
@@ -213,6 +219,7 @@ fun DiceFaceDots(value: Int) {
                 )
             }
             6 -> {
+                // Two columns of three dots
                 Box(
                     modifier = Modifier
                         .size(8.dp)
