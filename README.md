@@ -23,3 +23,12 @@ A modern Android dice game built with Jetpack Compose where players compete agai
 - **Coroutine Integration**: Smooth asynchronous operations for animations and AI turns
 - **Adaptive AI Strategy**: The Computer opponent adjusts its strategy based on the game situation
 - **Fallback Graphics**: Custom dot-based dice rendering when images are unavailable
+
+## 🎯 How to Play
+
+### Basic Rules
+1. **Objective**: Be the first to reach the target score (default: 101 points)
+2. **Turn Structure**: Each turn consists of up to 3 dice rolls
+3. **Dice Selection**: After each roll, choose which dice to keep for next roll
+4. **Scoring**: Sum of all 5 dice is added to your total score
+5. **Strategy**: Balance risk vs reward - reroll for higher scores or play it safe
