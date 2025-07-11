@@ -128,6 +128,24 @@ app/src/main/java/com/example/dueldice/
    ```
    Or use Android Studio's "Run" button
 
+## 🎨 Customization
+
+### Changing Target Score
+- Use "Set Score" button on main menu
+- Enter any positive integer
+- Default: 101 points
+
+### Visual Customization
+- Replace background images in `res/drawable/`
+- Modify colors in theme definitions
+- Adjust dice size by changing `.size(60.dp)` values
+- Customize animations by modifying `tween()` duration values
+
+### AI Difficulty
+Modify computer strategy in `GameLogic.kt`:
+- Adjust threshold values in `computerShouldReroll()`
+- Change dice keeping logic in `computerStrategy()`
+- Modify aggression levels based on score difference
 
 
 
