@@ -45,3 +45,11 @@ A modern Android dice game built with Jetpack Compose where players compete agai
    - Watch dice roll animations and strategic decisions
    - The computer considers the score difference and risk assessment
 
+3. **Winning Conditions**:
+   - First to reach the target score wins
+   - If both reach the target in the same round, the highest score wins
+   - If tied exactly, a sudden-death tie-breaker round
+
+
+
+
