@@ -736,7 +736,7 @@ fun GameScreen(
 
             Spacer(modifier = Modifier.height(16.dp))   // Add the spacing before the next section
 
-            // Current turn score
+            // Display current turn score based on the phase
             val currentScore = when (gameState.gamePhase) {
                 GamePhase.HUMAN_TURN -> gameState.humanDice.sum()
                 GamePhase.COMPUTER_TURN -> gameState.computerDice.sum()
@@ -745,28 +745,28 @@ fun GameScreen(
             }
 
             Text(
-                text = "Current Turn Score: $currentScore",
+                text = "Current Turn Score: $currentScore",     // Show the sum of dice rolled this turn
                 fontSize = 16.sp,
                 modifier = Modifier.fillMaxWidth(),
                 textAlign = TextAlign.Center,
                 fontWeight = FontWeight.Medium,
-                color = Color.White // Changed to white for visibility
+                color = Color.White // Changed to the white colour for visibility
             )
 
-            // Game status
+            // Show special message when in tie breaker phase
             if (gameState.gamePhase == GamePhase.TIE_BREAKER) {
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(
-                    text = "TIE BREAKER - Single roll determines winner!",
+                    text = "TIE BREAKER - Single roll determines winner!",  // Alert user about sudden death condition
                     fontSize = 14.sp,
                     modifier = Modifier.fillMaxWidth(),
                     textAlign = TextAlign.Center,
-                    color = Color(0xFFFF6B6B), // Light red for better visibility
+                    color = Color(0xFFFF6B6B), // Light red for warning
                     fontWeight = FontWeight.Bold
                 )
             }
 
-            Spacer(modifier = Modifier.height(24.dp))
+            Spacer(modifier = Modifier.height(24.dp))   // Final spacing before bottom content
 
             // Back to Menu button
             Button(
