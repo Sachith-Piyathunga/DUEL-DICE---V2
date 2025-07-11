@@ -267,32 +267,35 @@ fun DiceFaceDots(value: Int) {
     }
 }
 
+// Create a composable function for the main entry point of the game UI
 @Composable
 fun DiceGameApp() {
-    // Use rememberSaveable to preserve state across configuration changes
+    // Keeps track of which screen to show (main menu, about, or game screen)
     var currentScreen by rememberSaveable { mutableStateOf(Screen.MAIN_MENU) }
+    // Track number of wins by player and computer
     var humanWins by rememberSaveable { mutableStateOf(0) }
     var computerWins by rememberSaveable { mutableStateOf(0) }
+    // Set the defult target score to win the game
     var targetScore by rememberSaveable { mutableStateOf(101) }
 
+    // Display the appropriate screen based on current state
     when (currentScreen) {
         Screen.MAIN_MENU -> MainMenuScreen(
-            onNewGame = {
-                currentScreen = Screen.GAME
-            },
-            onAbout = { currentScreen = Screen.ABOUT },
-            onSetTarget = { target -> targetScore = target }
+            onNewGame = { currentScreen = Screen.GAME },    // Navigate to the Game screen
+            onAbout = { currentScreen = Screen.ABOUT },     // Navigate to theAbout screen
+            onSetTarget = { target -> targetScore = target }    // Update the target score
         )
-        Screen.ABOUT -> AboutScreen(
-            onBack = { currentScreen = Screen.MAIN_MENU }
+        Screen.ABOUT -> AboutScreen(    // Show the About screen
+            onBack = { currentScreen = Screen.MAIN_MENU }   // Navigate back to Main Menu
         )
-        Screen.GAME -> {
+        Screen.GAME -> {    // Show the Game screen
             // Create a unique key for GameScreen to force recomposition on new game
             key(humanWins + computerWins) {
                 GameScreen(
                     onGameEnd = { humanWon ->
+                        // Update win counters based on who is won
                         if (humanWon) humanWins++ else computerWins++
-                        currentScreen = Screen.MAIN_MENU
+                        currentScreen = Screen.MAIN_MENU    // Return back to the main menu after game ends
                     },
                     onBackToMenu = { currentScreen = Screen.MAIN_MENU },
                     humanWins = humanWins,
@@ -304,7 +307,7 @@ fun DiceGameApp() {
     }
 }
 
-enum class Screen {
+enum class Screen {     // set the enum class to represent which screen is currently active
     MAIN_MENU, ABOUT, GAME
 }
 
