@@ -532,11 +532,11 @@ fun GameScreen(
             )
         }
     }
-
+    // Outer box with background
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
-        // Background image - same as main menu
+        // Set the background image - same as main menu
         Image(
             painter = painterResource(id = R.drawable.game_background),
             contentDescription = "Dice background",
@@ -551,14 +551,14 @@ fun GameScreen(
                 .background(Color.Black.copy(alpha = 0.4f)) // Slightly darker for game screen
         )
 
-        // Game content
+        // Set the main vertical column for game content
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(16.dp)
                 .verticalScroll(rememberScrollState())
         ) {
-            // Score display
+            // Set the win counters for Player and Computer
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween
@@ -578,7 +578,7 @@ fun GameScreen(
             }
 
             Spacer(modifier = Modifier.height(16.dp))
-
+            // Set the target score, current turn, and number of rolls used
             Text(
                 text = "Target: $targetScore | Turn: ${gameState.currentTurn} | Rolls: ${gameState.rollCount}/3",
                 fontSize = 14.sp,
@@ -589,7 +589,7 @@ fun GameScreen(
 
             Spacer(modifier = Modifier.height(8.dp))
 
-            // Current phase indicator
+            // Display the current phase of the game
             Text(
                 text = when (gameState.gamePhase) {
                     GamePhase.HUMAN_TURN -> "Your Turn"
@@ -611,12 +611,12 @@ fun GameScreen(
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Dice display - Side by side
+            // Display the player and Computer dices side by side
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceEvenly
             ) {
-                // Human dice column
+                // Set the column for Player dice
                 Column(
                     modifier = Modifier.weight(1f),
                     horizontalAlignment = Alignment.CenterHorizontally
@@ -628,10 +628,12 @@ fun GameScreen(
                         modifier = Modifier.padding(bottom = 8.dp),
                         color = Color.White // Changed to white for visibility
                     )
+                    // Create the dice UI for player
                     DiceColumn(
                         dice = gameState.humanDice,
                         selectedDice = gameState.selectedDice,
                         onDiceClick = { index ->
+                            // Allows player to select dice only during his turn
                             if (gameState.canSelectDice && gameState.gamePhase == GamePhase.HUMAN_TURN) {
                                 gameState = gameState.copy(
                                     selectedDice = gameState.selectedDice.toMutableList().apply {
@@ -644,7 +646,7 @@ fun GameScreen(
                     )
                 }
 
-                // Computer dice column
+                // Set the column for Computer dice
                 Column(
                     modifier = Modifier.weight(1f),
                     horizontalAlignment = Alignment.CenterHorizontally
@@ -656,10 +658,11 @@ fun GameScreen(
                         modifier = Modifier.padding(bottom = 8.dp),
                         color = Color.White // Changed to white for visibility
                     )
+                    // Create the dice UI for computer
                     DiceColumn(
                         dice = gameState.computerDice,
                         selectedDice = listOf(false, false, false, false, false),
-                        onDiceClick = { },
+                        onDiceClick = { },  // Set the no click functionality for computer dice
                         isRolling = gameState.isRolling && gameState.gamePhase == GamePhase.COMPUTER_TURN
                     )
                 }
