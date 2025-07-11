@@ -57,7 +57,7 @@ fun DuelDiceTheme(content: @Composable () -> Unit) {
     )
 }
 
-// Helper function to get dice image resource
+// Helper function to get dice image resource base on the dice values
 fun getDiceResource(value: Int): Int? {
     return when (value) {
         1 -> R.drawable.dice_1
@@ -70,32 +70,34 @@ fun getDiceResource(value: Int): Int? {
     }
 }
 
-// Check if dice images exist
+// Function to check if all dice image resources exist
 @Composable
 fun diceImagesExist(): Boolean {
     val context = LocalContext.current
     return try {
+        // Try loading each dice image and if any fail it will throw an exception
         context.resources.getDrawable(R.drawable.dice_1, context.theme)
         context.resources.getDrawable(R.drawable.dice_2, context.theme)
         context.resources.getDrawable(R.drawable.dice_3, context.theme)
         context.resources.getDrawable(R.drawable.dice_4, context.theme)
         context.resources.getDrawable(R.drawable.dice_5, context.theme)
         context.resources.getDrawable(R.drawable.dice_6, context.theme)
-        true
+        true    // Send true if all resources exist
     } catch (e: Exception) {
-        false
+        false   // Send false at least one image is missing
     }
 }
 
-// Dice face using dots
+// Custom composable to visually draw a dice face with black dots based on its value
 @Composable
 fun DiceFaceDots(value: Int) {
+    // Add box to container the dice
     Box(
         modifier = Modifier
-            .size(60.dp)
-            .background(Color.White, RoundedCornerShape(8.dp))
-            .border(2.dp, Color.Black, RoundedCornerShape(8.dp))
-            .padding(4.dp)
+            .size(60.dp)    // Fixed size for each dice
+            .background(Color.White, RoundedCornerShape(8.dp))  // Add white background with rounded corners
+            .border(2.dp, Color.Black, RoundedCornerShape(8.dp))    // Add black border around the dice
+            .padding(4.dp)  // Add padding inside the dice
     ) {
         when (value) {
             1 -> {
