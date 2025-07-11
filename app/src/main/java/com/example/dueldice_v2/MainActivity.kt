@@ -844,47 +844,51 @@ fun DiceColumn(
     }
 }
 
+// Create the composable for the displays a single dice with optional image, animation and rolling
 @Composable
 fun DiceImage(
-    value: Int,
-    isSelected: Boolean,
-    onClick: () -> Unit,
-    isRolling: Boolean
+    value: Int,             // Set value of the dice (1–6)
+    isSelected: Boolean,    // Whether this dice is selected
+    onClick: () -> Unit,    // Lambda triggered when dice is clicked
+    isRolling: Boolean       // Indicates whether dice is currently rolling
 ) {
+    // Set the animate rotation when the dice is rolling
     val rotation by animateFloatAsState(
-        targetValue = if (isRolling) 360f else 0f,
+        targetValue = if (isRolling) 360f else 0f,  // Full rotation if rolling, else reset
         animationSpec = if (isRolling) {
-            infiniteRepeatable(
+            infiniteRepeatable(     // Repeat animation infinitely while rolling
                 animation = tween(500, easing = LinearEasing), // Same rotation speed as computer
                 repeatMode = RepeatMode.Restart
             )
         } else {
-            tween(0)
+            tween(0)    // No animation if not rolling
         },
         label = "diceRotation"
     )
 
+    // Determine if dice image resources are available
     val hasImages = diceImagesExist()
 
     Box(
         modifier = Modifier
-            .size(60.dp)
-            .rotate(if (isRolling) rotation else 0f)
+            .size(60.dp)        // Fixed size for dice
+            .rotate(if (isRolling) rotation else 0f)    // Apply animated rotation if rolling
             .border(
-                width = if (isSelected) 3.dp else 1.dp,
-                color = if (isSelected) Color.Red else Color.Gray,
+                width = if (isSelected) 3.dp else 1.dp, // Set the thicker border if selected
+                color = if (isSelected) Color.Red else Color.Gray,   // Set the red border if selected
                 shape = RoundedCornerShape(8.dp)
             )
             .background(
                 color = if (isSelected) Color.Red.copy(alpha = 0.2f) else Color.Transparent,
                 shape = RoundedCornerShape(8.dp)
             )
-            .clickable { onClick() },
-        contentAlignment = Alignment.Center
+            .clickable { onClick() },   // Set trigger to selection when clicked
+        contentAlignment = Alignment.Center // Center the dice content inside
     ) {
         if (hasImages) {
+            // Show dice face image from resources if available
             Image(
-                painter = painterResource(id = getDiceResource(value)!!),
+                painter = painterResource(id = getDiceResource(value)!!),   // Get corresponding drawable for dice value
                 contentDescription = "Dice showing $value",
                 modifier = Modifier.fillMaxSize(),
                 contentScale = ContentScale.Fit
