@@ -94,7 +94,39 @@ app/src/main/java/com/example/dueldice/
 - **DiceImage**: Individual dice rendering with animations
 - **DiceFaceDots**: Fallback dice rendering using dots
 
+## 🚀 Installation & Setup
 
+### Prerequisites
+- Android Studio Arctic Fox or later
+- Android SDK API level 21 or higher
+- Kotlin 1.7+
+- Jetpack Compose BOM 2023.03.00+
+
+### Installation Steps
+
+1. **Clone the Repository**:
+   ```bash
+   git clone <repository-url>
+   cd duel-dice
+   ```
+
+2. **Open in Android Studio**:
+   - Launch Android Studio
+   - Select "Open an existing project"
+   - Navigate to the project directory
+
+3. **Add Background Images**:
+   - Download the provided dice background images
+   - Place them in `app/src/main/res/drawable/`:
+     - `dice_background.png` (main menu background)
+     - `game_background.png` (game screen background)
+     - Optional: `dice_1.png` through `dice_6.png` (dice face images)
+
+4. **Build and Run**:
+   ```bash
+   ./gradlew assembleDebug
+   ```
+   Or use Android Studio's "Run" button
 
 
 
