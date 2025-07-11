@@ -1,10 +1,12 @@
 // Package declaration
 package com.example.dueldice
 
+// Import necessary libraries for UI color, coroutine delays, and random number generations
 import androidx.compose.ui.graphics.Color
 import kotlinx.coroutines.delay
 import kotlin.random.Random
 
+// Define the phases of the game
 enum class GamePhase {
     HUMAN_TURN, COMPUTER_TURN, GAME_OVER, TIE_BREAKER
 }
