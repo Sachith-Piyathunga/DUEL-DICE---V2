@@ -17,3 +17,9 @@ A modern Android dice game built with Jetpack Compose where players compete agai
 - **Modern Material Design**: Clean, intuitive interface with Jetpack Compose
 - **Responsive Layout**: Optimized for various Android screen sizes
 - **Visual Feedback**: Clear indication of selected dice, game phases, and current scores
+
+### Technical Features
+- **State Management**: Robust game state handling with automatic persistence
+- **Coroutine Integration**: Smooth asynchronous operations for animations and AI turns
+- **Adaptive AI Strategy**: The Computer opponent adjusts its strategy based on the game situation
+- **Fallback Graphics**: Custom dot-based dice rendering when images are unavailable
