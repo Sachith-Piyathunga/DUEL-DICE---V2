@@ -22,11 +22,11 @@ data class GameState(
     val currentTurn: Int = 1,           // Current turn number
     val rollCount: Int = 0,             // Number of times dice has been rolled in perticular turn
     val canThrow: Boolean = true,       // Whether the player can throw dice
-    val canScore: Boolean = false,
-    val canSelectDice: Boolean = false,
-    val isRolling: Boolean = false,
-    val gamePhase: GamePhase = GamePhase.HUMAN_TURN,
-    val isTieBreaker: Boolean = false
+    val canScore: Boolean = false,      // Whether the player can score this turn
+    val canSelectDice: Boolean = false, // Whether the player can select dice
+    val isRolling: Boolean = false,     // Whether dice rolling animation is ongoing
+    val gamePhase: GamePhase = GamePhase.HUMAN_TURN,    // Current phase of the game
+    val isTieBreaker: Boolean = false   // Whether the game is currently in a tie breaker round
 )
 
 class GameManager {
