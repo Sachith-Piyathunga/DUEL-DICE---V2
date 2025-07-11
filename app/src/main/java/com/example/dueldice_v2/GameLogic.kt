@@ -107,6 +107,7 @@ class GameManager {
         }
     }
 
+    // Human (player) turn score function (currently just changes game phase)
     fun scoreHumanTurn(
         gameState: GameState,
         targetScore: Int,
@@ -120,6 +121,7 @@ class GameManager {
         )
     }
 
+    // Handles the computer's full turn
     suspend fun handleComputerTurn(
         gameState: GameState,
         targetScore: Int,
@@ -145,7 +147,7 @@ class GameManager {
         computerDice = List(5) { Random.nextInt(1, 7) }
         computerRolls++
 
-        // Update state with new dice and stop rolling animation
+        // Update state with result of first roll and stop rolling animation
         currentState = currentState.copy(
             computerDice = computerDice,
             isRolling = false
@@ -183,7 +185,7 @@ class GameManager {
             }
         }
 
-        // Calculate final scores
+        // Calculate total scores
         val humanTurnScore = currentState.humanDice.sum()
         val computerTurnScore = computerDice.sum()
         val newHumanScore = currentState.humanScore + humanTurnScore
@@ -196,7 +198,7 @@ class GameManager {
             isRolling = false
         )
 
-        // Check for game end conditions
+        // Check tie breaker logic and end game conditions
         if (currentState.isTieBreaker) {
             when {
                 humanTurnScore > computerTurnScore -> {
@@ -222,6 +224,7 @@ class GameManager {
             }
         }
 
+        // Add the regular game-over conditions
         val humanReachedTarget = newHumanScore >= targetScore
         val computerReachedTarget = newComputerScore >= targetScore
 
@@ -260,7 +263,7 @@ class GameManager {
                 return currentState.copy(gamePhase = GamePhase.GAME_OVER)
             }
             else -> {
-                // Continue to next turn
+                // Continue to next player turn
                 return currentState.copy(
                     humanDice = listOf(1, 1, 1, 1, 1),
                     computerDice = listOf(1, 1, 1, 1, 1),
@@ -275,6 +278,7 @@ class GameManager {
         }
     }
 
+    // Determines whether computer should reroll based on score difference and current total
     private fun computerShouldReroll(
         currentDice: List<Int>,
         computerScore: Int,
@@ -298,6 +302,7 @@ class GameManager {
         return currentSum < threshold
     }
 
+    // Returns a list of which dice should be kept (true) based on computer strategy
     private fun computerStrategy(
         currentDice: List<Int>,
         computerScore: Int,
