@@ -311,23 +311,27 @@ enum class Screen {     // set the enum class to represent which screen is curre
     MAIN_MENU, ABOUT, GAME
 }
 
+// Create a composable function for the game screen
 @Composable
 fun MainMenuScreen(
-    onNewGame: () -> Unit,
-    onAbout: () -> Unit,
-    onSetTarget: (Int) -> Unit
+    onNewGame: () -> Unit,      // Callback for "New Game" button
+    onAbout: () -> Unit,        // Callback for "About" button
+    onSetTarget: (Int) -> Unit  // Callback for setting custom target score
 ) {
+    // Whether the "Set Target" dialog is shown
     var showTargetDialog by remember { mutableStateOf(false) }
+    // Input field value for target defult score
     var targetInput by remember { mutableStateOf("101") }
 
+    // Set the root container for the screen
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
-        // Background image
+        // Add the background image for the better experiance
         Image(
-            painter = painterResource(id = R.drawable.dice_background), // Replace with your image name
-            contentDescription = "Dice background",
-            modifier = Modifier.fillMaxSize(),
+            painter = painterResource(id = R.drawable.dice_background), // Replace image with image name
+            contentDescription = "Dice background",     // Add description for accessibility
+            modifier = Modifier.fillMaxSize(),       // Cover full screen with the image
             contentScale = ContentScale.Crop // This will fill the screen and crop if needed
         )
 
@@ -338,16 +342,15 @@ fun MainMenuScreen(
                 .background(Color.Black.copy(alpha = 0.3f)) // Adjust alpha for darkness
         )
 
-        // Main content
+        // Add the column for the main content
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(32.dp),
+                .padding(32.dp),         // Padding around the content
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
+            verticalArrangement = Arrangement.Center    // Center items vertically
         ) {
-            // Removed the "Duel Dice - V2" title since it's now in the background image
-
+            // Set the NEW GAME Button
             Button(
                 onClick = onNewGame,
                 modifier = Modifier
@@ -360,8 +363,9 @@ fun MainMenuScreen(
                 Text("New Game", fontSize = 20.sp)
             }
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(16.dp))   // Set the space between buttons
 
+            // Add the ABOUT button
             Button(
                 onClick = onAbout,
                 modifier = Modifier
@@ -376,6 +380,7 @@ fun MainMenuScreen(
 
             Spacer(modifier = Modifier.height(16.dp))
 
+            // Add SET SCORE button
             Button(
                 onClick = { showTargetDialog = true },
                 modifier = Modifier
@@ -390,39 +395,40 @@ fun MainMenuScreen(
         }
     }
 
+    // Set the score input dialog
     if (showTargetDialog) {
         Dialog(onDismissRequest = { showTargetDialog = false }) {
-            Card(
+            Card(   // Add the dialog card container
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(16.dp),
                 shape = RoundedCornerShape(16.dp)
             ) {
-                Column(
+                Column(     // Add he dialog content
                     modifier = Modifier.padding(16.dp),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Text("Set Target Score", fontSize = 20.sp, fontWeight = FontWeight.Bold)
                     Spacer(modifier = Modifier.height(16.dp))
-
+                    // Add the input field for custom target score
                     OutlinedTextField(
                         value = targetInput,
-                        onValueChange = { targetInput = it },
+                        onValueChange = { targetInput = it },   // Update state on input
                         label = { Text("Target Score") },
                         singleLine = true
                     )
 
                     Spacer(modifier = Modifier.height(16.dp))
-
+                    // Set the dialog buttons
                     Row {
-                        Button(
+                        Button( // Add the cancel button
                             onClick = { showTargetDialog = false },
                             modifier = Modifier.weight(1f)
                         ) {
                             Text("Cancel")
                         }
                         Spacer(modifier = Modifier.width(8.dp))
-                        Button(
+                        Button( // Add the set score button
                             onClick = {
                                 val target = targetInput.toIntOrNull()
                                 if (target != null && target > 0) {
