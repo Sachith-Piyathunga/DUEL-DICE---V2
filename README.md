@@ -75,7 +75,24 @@ app/src/main/java/com/example/dueldice/
         └── dice_6.png
 ```
 
+### Key Components
 
+#### GameLogic.kt
+- **GameState**: Data class holding complete game state
+- **GamePhase**: Enum for different game phases (HUMAN_TURN, COMPUTER_TURN, etc.)
+- **GameManager**: Core game logic handler with methods:
+  - `rollHumanDice()`: Handles player dice rolling
+  - `handleComputerTurn()`: Manages computer AI gameplay
+  - `computerStrategy()`: AI decision making for dice selection
+  - `computerShouldReroll()`: AI risk assessment for rerolling
+
+#### MainActivity.kt
+- **DiceGameApp**: Main navigation controller
+- **MainMenuScreen**: Welcome screen with background and buttons
+- **GameScreen**: Main gameplay interface
+- **AboutScreen**: Developer information
+- **DiceImage**: Individual dice rendering with animations
+- **DiceFaceDots**: Fallback dice rendering using dots
 
 
 
