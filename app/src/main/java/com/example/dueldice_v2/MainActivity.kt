@@ -670,19 +670,20 @@ fun GameScreen(
 
             Spacer(modifier = Modifier.height(24.dp))
 
-            // Game controls - only show for human turn
+            // Game controls - only show when it's the player's turn or tie breaker round
             if (gameState.gamePhase == GamePhase.HUMAN_TURN || gameState.gamePhase == GamePhase.TIE_BREAKER) {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceEvenly
                 ) {
+                    // Create a throw Button - triggers rolling of selected dice
                     Button(
                         onClick = {
                             coroutineScope.launch {
-                                gameState = gameManager.rollHumanDice(gameState)
+                                gameState = gameManager.rollHumanDice(gameState)    // Launch dice roll
                             }
                         },
-                        enabled = gameState.canThrow && !gameState.isRolling,
+                        enabled = gameState.canThrow && !gameState.isRolling,   // Only enable when allowed and not already rolling
                         modifier = Modifier
                             .weight(1f)
                             .height(50.dp),
@@ -692,19 +693,19 @@ fun GameScreen(
                     ) {
                         Text("Throw", fontSize = 18.sp)
                     }
-
+                    // If not a tie-breaker, show Score button
                     if (gameState.gamePhase != GamePhase.TIE_BREAKER) {
                         Spacer(modifier = Modifier.width(16.dp))
-
+                        // Set the score Button - end the player's turn and evaluate score
                         Button(
                             onClick = {
                                 gameState = gameManager.scoreHumanTurn(gameState, targetScore) { humanWon, message, color ->
-                                    winMessage = message
-                                    isHumanWinner = humanWon
-                                    showWinDialog = true
+                                    winMessage = message        // Show who won and why
+                                    isHumanWinner = humanWon    // Track winner
+                                    showWinDialog = true        // Open dialog
                                 }
                             },
-                            enabled = gameState.canScore && !gameState.isRolling,
+                            enabled = gameState.canScore && !gameState.isRolling,   // Only enable when scoring is allowed
                             modifier = Modifier
                                 .weight(1f)
                                 .height(50.dp),
@@ -717,7 +718,7 @@ fun GameScreen(
                     }
                 }
             } else if (gameState.gamePhase == GamePhase.COMPUTER_TURN) {
-                // Show computer thinking message
+                // Display a message when it's the computer's turn
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -733,7 +734,7 @@ fun GameScreen(
                 }
             }
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(16.dp))   // Add the spacing before the next section
 
             // Current turn score
             val currentScore = when (gameState.gamePhase) {
