@@ -40,5 +40,8 @@ A modern Android dice game built with Jetpack Compose where players compete agai
    - Reroll unselected dice (up to 2 more times)
    - Choose "Score" to end turn and add dice sum to total
   
-
+2. **Computer Turn**:
+   - The computer automatically plays with an intelligent strategy
+   - Watch dice roll animations and strategic decisions
+   - The computer considers the score difference and risk assessment
 
