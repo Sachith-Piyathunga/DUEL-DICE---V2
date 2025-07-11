@@ -820,23 +820,25 @@ fun GameScreen(
     }
 }
 
+//Create a composable for the displays a vertical column of dice with spacing and selection handling
 @Composable
 fun DiceColumn(
-    dice: List<Int>,
-    selectedDice: List<Boolean>,
-    onDiceClick: (Int) -> Unit,
-    isRolling: Boolean
+    dice: List<Int>,                    // List of dice values (1–6)
+    selectedDice: List<Boolean>,        // Boolean list indicating which dice are selected
+    onDiceClick: (Int) -> Unit,         // Callback when a dice is clicked (by index)
+    isRolling: Boolean                  // Indicates if dice are currently rolling
 ) {
     Column(
-        verticalArrangement = Arrangement.spacedBy(8.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp),   // Set spacing between dices
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        // Loop through each dice value and render it using DiceImage composable
         dice.forEachIndexed { index, value ->
             DiceImage(
-                value = value,
-                isSelected = selectedDice[index],
-                onClick = { onDiceClick(index) },
-                isRolling = isRolling
+                value = value,                      // Set the current dice face value
+                isSelected = selectedDice[index],   // Whether this dice is selected
+                onClick = { onDiceClick(index) },   // Handle click event
+                isRolling = isRolling               // Set the animation if dice are rolling
             )
         }
     }
