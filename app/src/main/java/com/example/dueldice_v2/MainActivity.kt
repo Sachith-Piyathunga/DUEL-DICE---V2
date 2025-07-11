@@ -495,38 +495,39 @@ fun AboutScreen(onBack: () -> Unit) {
     }
 }
 
+// Composable function for the displaying the Game screen
 @Composable
 fun GameScreen(
-    onGameEnd: (Boolean) -> Unit,
-    onBackToMenu: () -> Unit,
-    humanWins: Int,
-    computerWins: Int,
-    targetScore: Int
+    onGameEnd: (Boolean) -> Unit,   // Set the callback to notify whether human won
+    onBackToMenu: () -> Unit,       // Set the callback to return to main menu
+    humanWins: Int,                 // Set the number of times the player has won
+    computerWins: Int,              // Set the number of times the computer has won
+    targetScore: Int                // Set the score required to win the game
 ) {
-    // Create game manager instance
+    // Create a GameManager instance and a coroutine scope for operations
     val gameManager = remember { GameManager() }
     val coroutineScope = rememberCoroutineScope()
 
-    // Use remember to avoid serialization issues with complex state
+    // Set the mutable states to hold current game data and result dialog status
     var gameState by remember { mutableStateOf(GameState()) }
     var showWinDialog by remember { mutableStateOf(false) }
     var winMessage by remember { mutableStateOf("") }
     var isHumanWinner by remember { mutableStateOf(true) }
 
-    // Handle computer turn automatically
+    // When the game phase changes to COMPUTER_TURN, automatically play the computer's turn
     LaunchedEffect(gameState.gamePhase) {
         if (gameState.gamePhase == GamePhase.COMPUTER_TURN && !gameState.isRolling) {
-            delay(1000) // Brief pause before computer plays
+            delay(1000) // Wait a bit before computer starts playing
             gameState = gameManager.handleComputerTurn(
                 gameState = gameState,
                 targetScore = targetScore,
                 onGameEnd = { humanWon, message, color ->
-                    winMessage = message
-                    isHumanWinner = humanWon
-                    showWinDialog = true
+                    winMessage = message        // Set win/lose message
+                    isHumanWinner = humanWon    // Track who won
+                    showWinDialog = true        // Trigger win dialog
                 },
                 onStateUpdate = { newState ->
-                    gameState = newState
+                    gameState = newState        // Update state in real time
                 }
             )
         }
