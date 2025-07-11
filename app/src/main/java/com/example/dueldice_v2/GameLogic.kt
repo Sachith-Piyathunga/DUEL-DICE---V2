@@ -1,3 +1,4 @@
+
 // Package declaration
 package com.example.dueldice
 
@@ -11,15 +12,16 @@ enum class GamePhase {
     HUMAN_TURN, COMPUTER_TURN, GAME_OVER, TIE_BREAKER
 }
 
+// Represent the complete state of the game
 data class GameState(
-    val humanDice: List<Int> = listOf(1, 1, 1, 1, 1),
-    val computerDice: List<Int> = listOf(1, 1, 1, 1, 1),
-    val selectedDice: List<Boolean> = listOf(false, false, false, false, false),
-    val humanScore: Int = 0,
-    val computerScore: Int = 0,
-    val currentTurn: Int = 1,
-    val rollCount: Int = 0,
-    val canThrow: Boolean = true,
+    val humanDice: List<Int> = listOf(1, 1, 1, 1, 1),   // Dice values for human
+    val computerDice: List<Int> = listOf(1, 1, 1, 1, 1),    // Dice values for computer
+    val selectedDice: List<Boolean> = listOf(false, false, false, false, false),    // Dice selected by player to keep
+    val humanScore: Int = 0,            // Total score of the human player
+    val computerScore: Int = 0,         // Total score of the computer
+    val currentTurn: Int = 1,           // Current turn number
+    val rollCount: Int = 0,             // Number of times dice has been rolled in perticular turn
+    val canThrow: Boolean = true,       // Whether the player can throw dice
     val canScore: Boolean = false,
     val canSelectDice: Boolean = false,
     val isRolling: Boolean = false,
