@@ -447,27 +447,30 @@ fun MainMenuScreen(
     }
 }
 
+// Composable function for the displaying the "About" screen
 @Composable
 fun AboutScreen(onBack: () -> Unit) {
-    Dialog(onDismissRequest = onBack) {
+    Dialog(onDismissRequest = onBack) { // Displays a modal dialog. Dismisses when user taps outside or presses "Close"
+        // Card provides a material surface with rounded corners and padding
         Card(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            shape = RoundedCornerShape(16.dp)
+                .fillMaxWidth()     // Makes the dialog card span full width of parent
+                .padding(16.dp),    // Outer padding from screen edges
+            shape = RoundedCornerShape(16.dp)    // Rounded corners for the card
         ) {
+            // Content inside the card is arranged vertically
             Column(
-                modifier = Modifier.padding(16.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
+                modifier = Modifier.padding(16.dp),     // Set the inner padding for card content
+                horizontalAlignment = Alignment.CenterHorizontally  // Center-align all child elements
             ) {
-                Text(
+                Text(       // Set the about button title: "About"
                     text = "About",
                     fontSize = 24.sp,
                     fontWeight = FontWeight.Bold
                 )
 
-                Spacer(modifier = Modifier.height(16.dp))
-
+                Spacer(modifier = Modifier.height(16.dp))   // Set the space between elements
+                // Add my details
                 Text(
                     text = "Student ID: w2053013\nName: Sachintha Chamod Piyathunga",
                     fontSize = 16.sp,
@@ -475,7 +478,7 @@ fun AboutScreen(onBack: () -> Unit) {
                 )
 
                 Spacer(modifier = Modifier.height(16.dp))
-
+                // Declaration of academic integrity
                 Text(
                     text = "I confirm that I understand what plagiarism is and have read and understood the section on Assessment Offences in the Essential Information for Students. The work that I have submitted is entirely my own. Any work from other authors is duly referenced and acknowledged.",
                     fontSize = 14.sp,
@@ -483,7 +486,7 @@ fun AboutScreen(onBack: () -> Unit) {
                 )
 
                 Spacer(modifier = Modifier.height(16.dp))
-
+                // Add close button to dismiss the dialog and go back
                 Button(onClick = onBack) {
                     Text("Close")
                 }
