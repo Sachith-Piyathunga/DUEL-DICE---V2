@@ -30,6 +30,10 @@ A modern Android dice game built with Jetpack Compose where players compete agai
 
 ![image](https://github.com/Sachith-Piyathunga/DUEL-DICE---V2/blob/ddb7be36d94f00df79e0076473e4793783d4a4be/Image/Main%20Screen.png)
 
+## Game screen
+
+![image](https://github.com/Sachith-Piyathunga/DUEL-DICE---V2/blob/f9a7c56e0f7f4dedc79401b003c8c5aaa00b11ff/Image/Game%20Screen.png)
+
 ---
 ## 🎯 How to Play
 
