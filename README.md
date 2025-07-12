@@ -24,6 +24,13 @@ A modern Android dice game built with Jetpack Compose where players compete agai
 - **Adaptive AI Strategy**: The Computer opponent adjusts its strategy based on the game situation
 - **Fallback Graphics**: Custom dot-based dice rendering when images are unavailable
 
+---
+
+## Home Screen
+
+![image](https://github.com/Sachith-Piyathunga/DUEL-DICE---V2/blob/ddb7be36d94f00df79e0076473e4793783d4a4be/Image/Main%20Screen.png)
+
+---
 ## 🎯 How to Play
 
 ### Basic Rules
